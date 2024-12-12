@@ -18,6 +18,7 @@
   let cities: CityDataArray = $state([]);
   let worker: Worker;
   let searching = $state(false);
+  let selected_result = $state(0);
 
   onMount(async () => {
     const resourcePath = await resolveResource('resources/worldcities.csv');
@@ -48,17 +49,32 @@
   
   let submit = () => {
     if (!cities.length) return;
-    entryState.entry = cities[0];
+    entryState.entry = cities[selected_result];
     goto("/weather");
   }
 
-  let search = () => {
+  let search = (event: KeyboardEvent) => {
+    if (event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      return;
+    }
     if (input_value == "") {
       cities = [];
+      selected_result = 0;
       return;
     }
     searching = true;
     worker.postMessage(input_value.slice(0, 10));
+  }
+
+  let select = (event: KeyboardEvent) => {
+    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+      event.preventDefault();
+      if (event.key === "ArrowUp") {
+        if (selected_result !== 0) selected_result -= 1;
+      } else if (event.key === "ArrowDown") {
+        if (selected_result < cities.length - 1) selected_result += 1;
+      }
+    }
   }
 </script>
 
@@ -66,11 +82,11 @@
   <main>
     <h1>PrettyWeather</h1>
     <form onsubmit={(e) => {e.preventDefault(); submit();}}>
-      <input type="text" placeholder="Enter name of the city..." onkeyup={search} bind:value={input_value} class:border-fix={cities.length}>
+      <input type="text" placeholder="Enter name of the city..." onkeyup={search} onkeydown={select} bind:value={input_value} class:border-fix={cities.length}>
       {#if cities.length}
         <div class="results" transition:slide>
           {#each cities as entry, i (entry.id)}
-            <p><span>{entry.city}, {entry.country}</span> {#if i === 0}<Enter />{/if}</p>
+            <p class:selected={i === selected_result}><span>{entry.city}, {entry.country}</span> {#if i === selected_result}<Enter />{/if}</p>
           {/each}
         </div>
       {/if}
@@ -136,7 +152,7 @@
     justify-content: space-between;
   }
 
-  .results p:first-child {
+  .selected {
     border: 1px solid var(--accent);
     font-weight: bold;
   }
