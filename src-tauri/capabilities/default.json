@@ -7,9 +7,6 @@
   ],
   "permissions": [
     "core:default",
-    "shell:allow-open",
-    "fs:default",
-    "fs:allow-read-text-file",
-    "fs:allow-resource-read-recursive"
+    "shell:allow-open"
   ]
 }

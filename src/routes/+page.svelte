@@ -1,14 +1,12 @@
 <script lang="ts">
-  import { resolveResource } from '@tauri-apps/api/path';
-  import { readTextFile } from '@tauri-apps/plugin-fs';
-
   import { goto } from "$app/navigation";
   import { onDestroy, onMount, tick } from "svelte";
   import { slide, fly } from 'svelte/transition';
 
   import Papa from 'papaparse';
+  import worldcities from '$lib/worldcities.csv?raw';
 
-  import searchWorkerURL from '$lib/search_worker.js?url';
+  import searchWorker from '$lib/search_worker.js?worker';
   import Enter from '$lib/icons/Enter.svelte';
   import Spinner from '$lib/icons/Spinner.svelte';
   import { entryState } from '$lib/state.svelte';
@@ -21,9 +19,7 @@
   let selected_result = $state(0);
 
   onMount(async () => {
-    const resourcePath = await resolveResource('resources/worldcities.csv');
-    const csvData = await readTextFile(resourcePath);
-    const parsed = Papa.parse(csvData);
+    const parsed = Papa.parse(worldcities);
     const headers = parsed.data[0];
     data = parsed.data.slice(1).map(row => {
       // @ts-ignore
@@ -33,7 +29,7 @@
         return acc;
       }, {});
     });
-    worker = new Worker(searchWorkerURL, { type: "module" });
+    worker = new searchWorker();
     worker.postMessage(data);
     worker.onmessage = (event) => {
       if (input_value) {
