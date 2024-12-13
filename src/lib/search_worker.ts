@@ -1,21 +1,28 @@
 import Fuse from 'fuse.js';
+import Papa from 'papaparse';
+import worldcities from '$lib/worldcities.csv?raw';
 
 const options = {
-    keys: ['city_ascii'],
-    threshold: 0.3
+  keys: ['city_ascii'],
+  threshold: 0.3
 };
+let data: CityDataArray;
 
-let fuse: Fuse<CityData>;
-let first = true;
+const parsed = Papa.parse(worldcities);
+const headers = parsed.data[0];
+data = parsed.data.slice(1).map(row => {
+  // @ts-ignore
+  return row.reduce((acc, value, index) => {
+    // @ts-ignore
+    acc[headers[index]] = value;
+    return acc;
+  }, {});
+});
+let fuse = new Fuse(data, options);
 
 onmessage = (event) => {
-    const data = event.data as string;
-    if (first) {
-        fuse = new Fuse(event.data, options);
-        first = false;
-        return;
-    }
-    const result = fuse.search(data, {limit:3});
-    const cities = result.map((entry) => {return entry.item;});
-    postMessage(cities);
+  const input = event.data as string;
+  const result = fuse.search(input, {limit:3});
+  const cities = result.map((entry) => {return entry.item;});
+  postMessage(cities);
 }

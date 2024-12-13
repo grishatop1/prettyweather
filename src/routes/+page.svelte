@@ -3,34 +3,19 @@
   import { onDestroy, onMount, tick } from "svelte";
   import { slide, fly } from 'svelte/transition';
 
-  import Papa from 'papaparse';
-  import worldcities from '$lib/worldcities.csv?raw';
-
   import searchWorker from '$lib/search_worker.js?worker';
   import Enter from '$lib/icons/Enter.svelte';
   import Spinner from '$lib/icons/Spinner.svelte';
   import { entryState } from '$lib/state.svelte';
 
   let input_value = $state("");
-  let data: CityDataArray;
   let cities: CityDataArray = $state([]);
   let worker: Worker;
   let searching = $state(false);
   let selected_result = $state(0);
 
-  onMount(async () => {
-    const parsed = Papa.parse(worldcities);
-    const headers = parsed.data[0];
-    data = parsed.data.slice(1).map(row => {
-      // @ts-ignore
-      return row.reduce((acc, value, index) => {
-        // @ts-ignore
-        acc[headers[index]] = value;
-        return acc;
-      }, {});
-    });
+  onMount(() => {
     worker = new searchWorker();
-    worker.postMessage(data);
     worker.onmessage = (event) => {
       if (input_value) {
         cities = event.data;
