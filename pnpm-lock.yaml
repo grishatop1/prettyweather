@@ -14,6 +14,9 @@ importers:
       '@tauri-apps/plugin-shell':
         specifier: ^2
         version: 2.2.0
+      chart.js:
+        specifier: ^4.4.7
+        version: 4.4.7
       fuse.js:
         specifier: ^7.0.0
         version: 7.0.0
@@ -213,6 +216,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@kurkle/color@0.3.4':
+    resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
 
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
@@ -441,6 +447,10 @@ packages:
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
     engines: {node: '>= 0.4'}
+
+  chart.js@4.4.7:
+    resolution: {integrity: sha512-pwkcKfdzTMAU/+jNosKhNL2bHtJc/sSmYgVbuGTEDhzkrhmyihmP7vUc/5ZK9WopidMDHNe3Wm7jOd/WhuHWuw==}
+    engines: {pnpm: '>=8'}
 
   chokidar@4.0.1:
     resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
@@ -731,6 +741,8 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@kurkle/color@0.3.4': {}
+
   '@polka/url@1.0.0-next.28': {}
 
   '@rollup/rollup-android-arm-eabi@4.28.1':
@@ -904,6 +916,10 @@ snapshots:
   aria-query@5.3.2: {}
 
   axobject-query@4.1.0: {}
+
+  chart.js@4.4.7:
+    dependencies:
+      '@kurkle/color': 0.3.4
 
   chokidar@4.0.1:
     dependencies:

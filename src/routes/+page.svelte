@@ -59,7 +59,7 @@
   }
 </script>
 
-<div class="page" transition:fly={{x:200}}>
+<div class="page" transition:fly={{x:-200}}>
   <main>
     <h1>PrettyWeather</h1>
     <form onsubmit={(e) => {e.preventDefault(); submit();}}>
@@ -73,7 +73,7 @@
       {/if}
       {#if searching}
         <div class="spinner">
-          <Spinner />
+          <Spinner fast />
         </div>
       {/if}
     </form>

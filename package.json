@@ -15,6 +15,7 @@
   "dependencies": {
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-shell": "^2",
+    "chart.js": "^4.4.7",
     "fuse.js": "^7.0.0",
     "papaparse": "^5.4.1"
   },

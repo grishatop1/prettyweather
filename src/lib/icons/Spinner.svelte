@@ -1,3 +1,7 @@
+<script>
+    let { fast = false } = $props();
+</script>
+
 <svg
     width="24"
     height="24"
@@ -8,7 +12,7 @@
         ><animateTransform
             attributeName="transform"
             type="rotate"
-            dur="0.2s"
+            dur={((fast) ? '0.2s' : '0.75')}
             values="0 12 12;360 12 12"
             repeatCount="indefinite"
         /></path
