@@ -20,6 +20,7 @@
         { year: 2015, count: 15 },
         { year: 2016, count: 28 },
     ];
+    let selected_day = $state(0);
 
     onMount(() => {
         const style = getComputedStyle(document.body);
@@ -72,11 +73,11 @@
         <h2><Spinner /></h2>
     </section>
     <section>
-        <canvas id="chart" bind:this={chart}></canvas>
+        <canvas bind:this={chart}></canvas>
     </section>
     <section class="days">
         {#each {length: 7} as _, i}
-            <DayButton number={i} />
+            <DayButton number={i} selected={selected_day === i} select={() => {selected_day = i}} />
         {/each}
     </section>
 </div>
@@ -86,6 +87,9 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+    }
+    section {
+        margin: 0 15px;
     }
     .back {
         position: absolute;
@@ -100,10 +104,11 @@
         flex-direction: column;
     }
     canvas {
-        height: 150px !important;
+        max-width: 100%;
+        height: max-content;
     }
     .days {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
     }
 </style>

@@ -1,9 +1,19 @@
 <script>
-    const { number } = $props();
+    const { number, selected = false, select } = $props();
+
+    const data = [
+        "Today",
+        "Tomorrow",
+        "In 3 days",
+        "In 4 days",
+        "In 5 days",
+        "In 6 days",
+        "In 7 days"
+    ]
 </script>
 
-<button>
-    <p>s</p>
+<button class:selected onclick={select}>
+    <p>{data[number]}</p>
 </button>
 
 <style>
@@ -18,5 +28,12 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+        transition: border 0.2s;
+        padding: 6px;
+        margin: 5px;
+    }
+
+    .selected {
+        border: 2px solid var(--accent);
     }
 </style>
