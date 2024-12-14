@@ -35,3 +35,10 @@ h1 {
 input:focus {
     outline: none;
 }
+
+button {
+    color: var(--accent);
+    background-color: var(--primary);
+    border: none;
+    cursor: pointer;
+}

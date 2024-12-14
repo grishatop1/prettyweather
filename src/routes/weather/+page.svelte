@@ -2,10 +2,13 @@
     import Chart from "chart.js/auto";
 
     import { fly } from "svelte/transition";
+    import { onMount } from "svelte";
+    import { goto } from "$app/navigation";
 
     import { entryState } from "$lib/state.svelte";
     import Spinner from "$lib/icons/Spinner.svelte";
-    import { onMount } from "svelte";
+    import DayButton from "$lib/components/DayButton.svelte";
+    
 
     let chart: HTMLCanvasElement;
     const data = [
@@ -63,6 +66,7 @@
 </script>
 
 <div class="page" transition:fly={{ x: 200 }}>
+    <button class="back" onclick={() => {goto("/")}}>Back</button>
     <section class="temperature">
         <h1>{entryState.entry?.city}</h1>
         <h2><Spinner /></h2>
@@ -70,9 +74,26 @@
     <section>
         <canvas id="chart" bind:this={chart}></canvas>
     </section>
+    <section class="days">
+        {#each {length: 7} as _, i}
+            <DayButton number={i} />
+        {/each}
+    </section>
 </div>
 
 <style>
+    .page {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .back {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px;
+        background-color: var(--bg);
+    }
     .temperature {
         display: flex;
         align-items: center;
@@ -80,5 +101,9 @@
     }
     canvas {
         height: 150px !important;
+    }
+    .days {
+        display: flex;
+        justify-content: space-between;
     }
 </style>
