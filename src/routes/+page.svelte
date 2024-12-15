@@ -67,7 +67,11 @@
       {#if cities.length}
         <div class="results" transition:slide>
           {#each cities as entry, i (entry.id)}
-            <p class:selected={i === selected_result}><span>{entry.city}, {entry.country}</span> {#if i === selected_result}<Enter />{/if}</p>
+            <p class:selected={i === selected_result}>
+              <img src={`flags/${entry.iso2.toLowerCase()}.svg`} alt="Flag" height="16">
+              <span class="entry-text">{entry.city}, {entry.country}</span>
+              <span class="enter-icon">{#if i === selected_result}<Enter />{/if}</span>
+            </p>
           {/each}
         </div>
       {/if}
@@ -130,7 +134,19 @@
     padding: 0 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: left;
+  }
+
+  .results p img {
+    border-radius: 4px;
+  }
+
+  .entry-text {
+    margin-left: 10px;
+  }
+
+  .enter-icon {
+    margin-left: auto;
   }
 
   .selected {
