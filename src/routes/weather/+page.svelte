@@ -12,13 +12,13 @@
 
     let chart: HTMLCanvasElement;
     const data = [
-        { year: 2010, count: 10 },
-        { year: 2011, count: 20 },
-        { year: 2012, count: 15 },
-        { year: 2013, count: 25 },
-        { year: 2014, count: 22 },
-        { year: 2015, count: 15 },
-        { year: 2016, count: 28 },
+        { hours: "2pm", precipitation: 10 },
+        { hours: "2pm", precipitation: 20 },
+        { hours: "2pm", precipitation: 15 },
+        { hours: "2pm", precipitation: 25 },
+        { hours: "2pm", precipitation: 22 },
+        { hours: "2pm", precipitation: 15 },
+        { hours: "2pm", precipitation: 28 },
     ];
     let selected_day = $state(0);
 
@@ -33,10 +33,10 @@
         new Chart(chart, {
             type: "line",
             data: {
-                labels: data.map((row) => row.year),
+                labels: data.map((row) => row.hours),
                 datasets: [
                     {
-                        data: data.map((row) => row.count),
+                        data: data.map((row) => row.precipitation),
                         borderColor: accent_color,
                         tension: 0.3
                     },

@@ -6,6 +6,7 @@
   import searchWorker from '$lib/search_worker.js?worker';
   import Enter from '$lib/icons/Enter.svelte';
   import Spinner from '$lib/icons/Spinner.svelte';
+  import Cloud from "$lib/icons/Cloud.svelte";
   import { entryState } from '$lib/state.svelte';
 
   let input_value = $state("");
@@ -61,7 +62,7 @@
 
 <div class="page" transition:fly={{x:-200}}>
   <main>
-    <h1>PrettyWeather</h1>
+    <h1>PrettyWeather <Cloud /></h1>
     <form onsubmit={(e) => {e.preventDefault(); submit();}}>
       <input type="text" placeholder="Enter name of the city..." onkeyup={search} onkeydown={select} bind:value={input_value} class:border-fix={cities.length}>
       {#if cities.length}
@@ -151,7 +152,8 @@
 
   .selected {
     border: 1px solid var(--accent);
-    font-weight: bold;
+    font-weight: 600;
+    letter-spacing: 1px;
   }
 
   .results p:last-child {
