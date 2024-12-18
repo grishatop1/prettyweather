@@ -7,6 +7,7 @@
   import Enter from '$lib/icons/Enter.svelte';
   import Spinner from '$lib/icons/Spinner.svelte';
   import Cloud from "$lib/icons/Cloud.svelte";
+  import ColorPicker from "$lib/components/ColorPicker.svelte";
   import { entryState } from '$lib/state.svelte';
 
   let input_value = $state("");
@@ -61,6 +62,9 @@
 </script>
 
 <div class="page" transition:fly={{x:-200}}>
+  <div class="colorpicker">
+    <ColorPicker />
+  </div>
   <main>
     <h1>PrettyWeather <Cloud /></h1>
     <form onsubmit={(e) => {e.preventDefault(); submit();}}>
@@ -174,5 +178,11 @@
     border-top-right-radius: 6px;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
+  }
+
+  .colorpicker {
+    position: absolute;
+    top: 10px;
+    left: 10px;
   }
 </style>

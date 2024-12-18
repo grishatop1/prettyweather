@@ -10,6 +10,7 @@
     
     color: var(--accent);
     font-family: "Gabarito";
+    transition: color 0.2s, background-color 0.2s;
 }
 
 * {
