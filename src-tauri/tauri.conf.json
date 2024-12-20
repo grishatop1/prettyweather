@@ -14,8 +14,9 @@
       {
         "title": "prettyweather",
         "width": 640,
-        "height": 480,
-        "decorations": false
+        "height": 420,
+        "decorations": false,
+        "resizable": false
       }
     ],
     "security": {

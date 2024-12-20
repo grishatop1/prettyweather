@@ -154,7 +154,7 @@
         max-width: 100%;
         height: 100%;
         position: relative;
-    }
+    }   
     .days {
         display: flex;
         justify-content: center;
