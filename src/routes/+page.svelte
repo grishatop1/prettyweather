@@ -68,7 +68,7 @@
   <main>
     <h1>PrettyWeather <Cloud /></h1>
     <form onsubmit={(e) => {e.preventDefault(); submit();}}>
-      <input type="text" placeholder="Enter name of the city..." onkeyup={search} onkeydown={select} bind:value={input_value} class:border-fix={cities.length}>
+      <input type="text" placeholder="Enter location..." onkeyup={search} onkeydown={select} bind:value={input_value} class:border-fix={cities.length}>
       {#if cities.length}
         <div class="results" transition:slide>
           {#each cities as entry, i (entry.id)}

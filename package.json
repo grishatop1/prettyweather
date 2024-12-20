@@ -17,6 +17,7 @@
     "@tauri-apps/plugin-shell": "^2",
     "chart.js": "^4.4.7",
     "fuse.js": "^7.0.0",
+    "openmeteo": "^1.1.4",
     "papaparse": "^5.4.1"
   },
   "devDependencies": {
